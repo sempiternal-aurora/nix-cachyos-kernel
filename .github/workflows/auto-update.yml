@@ -66,6 +66,7 @@ jobs:
         run: |
           export TMPDIR=/nix/tmpdir
           nix flake update
+          nix run .#update-kernel-cachyos
           nix run .#update-zfs-cachyos
 
       - name: Commit back to repository
