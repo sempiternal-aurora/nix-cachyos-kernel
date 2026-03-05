@@ -129,6 +129,8 @@
             cachyosKernels = self.legacyPackages."${final.stdenv.hostPlatform.system}";
           };
 
+          cachyos-kernel-input-path = inputs.cachyos-kernel.outPath;
+
           mkCachyKernel =
             { buildLinux, pkgs, ... }@args:
             (import ./kernel-cachyos/mkCachyKernel.nix) {

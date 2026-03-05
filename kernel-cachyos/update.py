@@ -1,25 +1,29 @@
 import json
 from pathlib import Path
-import re
 import subprocess
-
-import requests
+import tempfile
 
 
 def get_srctag(variant: str = "latest") -> str:
-    pkgbuild_path = f"linux-cachyos-{variant}" if variant != "latest" else "linux-cachyos"
-    url = f"https://github.com/CachyOS/linux-cachyos/raw/refs/heads/master/{pkgbuild_path}/PKGBUILD"
-    pkgbuild = requests.get(url).text
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as dir:
+        subprocess.run(
+            ["nix", "build", ".#cachyos-kernel-input-path", "-o", f"{dir}/result"], check=True
+        )
 
-    script = pkgbuild + "\necho $_srctag"
-    result = subprocess.run(
-        ["bash"],
-        input=script,
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    return result.stdout.strip()
+        pkgbuild_path = f"linux-cachyos-{variant}" if variant != "latest" else "linux-cachyos"
+
+        with open(f"{dir}/result/{pkgbuild_path}/PKGBUILD") as f:
+            pkgbuild = f.read()
+
+        script = pkgbuild + "\necho $_srctag"
+        result = subprocess.run(
+            ["bash"],
+            input=script,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return result.stdout.strip()
 
 
 def nix_sha256_to_sri(hash: str) -> str:
