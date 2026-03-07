@@ -124,6 +124,9 @@ lib.makeOverridable (
         OVERLAY_FS_XINO_AUTO = no;
         OVERLAY_FS_METACOPY = no;
         OVERLAY_FS_DEBUG = no;
+
+        # Fix HID_HAPTIC linking error
+        HID = yes;
       })
 
       # Apply CachyOS specific settings
