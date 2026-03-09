@@ -10,8 +10,8 @@
     "hash": "sha256-6oIH/p3HRVy0ylS48M2BSmalpzfJHE33VhoYY3SZz8s="
   },
   "rc": {
-    "version": "7.0-rc2",
-    "url": "https://github.com/CachyOS/linux/releases/download/cachyos-7.0-rc2-1/cachyos-7.0-rc2-1.tar.gz",
-    "hash": "sha256-0910iCTtdArSw8C6SZBeLUSlsmImfYiqlLO9+5EOHqc="
+    "version": "7.0-rc3",
+    "url": "https://github.com/CachyOS/linux/releases/download/cachyos-7.0-rc3-1/cachyos-7.0-rc3-1.tar.gz",
+    "hash": "sha256-+oWnfrNyTioD00QqvV5mbDoz/h/bjIVe0f+uWekjnFI="
   }
 }
