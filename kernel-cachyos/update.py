@@ -30,7 +30,7 @@ def get_srctag(variant: str = "latest") -> str:
 
 
 def nix_sha256_to_sri(hash: str) -> str:
-    cmd = ["nix", "hash", "convert", "--hash-algo", "sha256", "--to", "sri", hash]
+    cmd = ["nix", "hash", "to-sri", "--type", "sha256", hash]
 
     print(f"Running command: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)

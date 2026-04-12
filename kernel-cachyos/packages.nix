@@ -16,10 +16,15 @@ lib.mapAttrs' (
   let
     packages = kernelModuleLLVMOverride (
       (linuxKernel.packagesFor v).extend (
-        final: prev: {
-          zfs_cachyos = final.callPackage ../zfs-cachyos {
+        final: prev:
+        let
+          zfsVariant = lib.removePrefix "linux-cachyos-" v.cachyosConfigVariant;
+          zfsPackages = final.callPackage ../zfs-cachyos {
             inherit inputs;
           };
+        in
+        {
+          zfs_cachyos = zfsPackages."${zfsVariant}" or zfsPackages.latest;
         }
       )
     );

@@ -210,6 +210,7 @@ lib.makeOverridable (
 
       extraPassthru = {
         inherit cachyosConfigFile cachyosPatches;
+        cachyosConfigVariant = configVariant;
       }
       // (args.extraPassthru or { });
     }
